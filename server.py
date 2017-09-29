@@ -8,9 +8,14 @@ def main_page():
     return render_template('index.html')
 
 
-@app.route('/memory')
+@app.route('/memory', methods=['GET'])
 def game_page():
-    return render_template('game.html')
+    #data = request.form.to_dict()
+    #{"row":"5", "column": "6"}
+    rows = request.args.get('row')
+    cols = request.args.get('column')
+    num = int(rows) * int(cols)
+    return render_template('game.html', num=num)
 
 if __name__ == '__main__':
     app.secret_key = "b'\x95=\xb1\t\xb2\x8eL\r\xed\x17\x07MQ\xf5\x86\xb3\xac\xed<\x92\x05Z\xb6\xae'"
